@@ -10,7 +10,7 @@ namespace WcfDollarLibrary
     public static class ParsingUtils
     {
         private static readonly string[] onesNames = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
-        private static readonly string[] tensNames = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+        private static readonly string[] tensNames = { "", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
         private static readonly string[] teensNames = { "ten", "eleven", "twelve", "thirteen", "forteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
         private static readonly string[] unitNames = { "hundred", "thousand", "million" };
         /// <summary>
@@ -49,8 +49,8 @@ namespace WcfDollarLibrary
         }
         public static Tuple<int,int> ParseMoneyAmount(string toParse)
         {
-            int cents=0;
-            int dollars=0;
+            int decimals=0;
+            int ones=0;
             if (toParse == null)
             {
                 throw new ArgumentNullException();
@@ -66,41 +66,40 @@ namespace WcfDollarLibrary
             }
             if (values.Length == 2)
             {
-                string centText = values[1].TrimEnd(' ');
-                if (centText.Length == 1) //user provided just tenths of a dollar
+                string fractionText = values[1].TrimEnd(' ');
+                if (fractionText.Length == 1) //user provided just tenths of a dollar
                 {
-                    centText.Append('0');
+                    fractionText +="0";
+
                 }
-                if(!centText.All(char.IsDigit))
+                fractionText = fractionText.Substring(0, 2); //truncate too many digits
+                if(!fractionText.All(char.IsDigit))
                 {
                     throw new FormatException(toParse);
                 }
                 try
                 {
-                    cents = ParseInt(centText);
+                    decimals = ParseInt(fractionText);
                 }
                 catch (FormatException)
                 {
                     Debug.WriteLine("Fail parsing with" + toParse);
                     throw new FormatException(toParse); //adding the string for which the parsing had failed for easier debugging
                 }
-                while (cents>=100)
-                {
-                    cents /= 10; //in case somebody entered too many digits after comma (just truncate, could be also rounding)
-                }
+
                
             }
             //for values with length 1 cents are 0
             try
             {
-                dollars = ParseInt(values[0]);
+                ones = ParseInt(values[0]);
             }
             catch (FormatException)
             {
                 Debug.WriteLine("Fail parsing with" + toParse);
                 throw new FormatException(toParse); //adding the string for which the parsing had failed for easier debugging
             }
-            return new Tuple<int, int>(dollars, cents);
+            return new Tuple<int, int>(ones, decimals);
 
 
 
@@ -178,14 +177,12 @@ namespace WcfDollarLibrary
                 result.Append(teensNames[ones]);
                 return result.ToString();
             }
-            if (tens>0)
+            result.Append(tensNames[tens]);
+            if(ones>0 && tens > 0)
             {
-                result.Append(tensNames[tens]);
-                if(ones>0)
-                {
-                    result.Append("-");
-                }
+                result.Append("-");
             }
+
             if(ones>0)
             {
                 result.Append(onesNames[ones]);
