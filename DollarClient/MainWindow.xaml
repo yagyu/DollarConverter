@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DollarClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Dollar Converter" Height="150        " Width="400
+        ">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="93*"/>
+            <ColumnDefinition Width="213*"/>
+            <ColumnDefinition Width="67*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="12,48,-65,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="445" Grid.ColumnSpan="4"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="12,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="236" Grid.ColumnSpan="3"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="195,13,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Grid.ColumnSpan="2"/>
+
+
     </Grid>
 </Window>
