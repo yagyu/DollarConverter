@@ -41,8 +41,8 @@ namespace WcfDollarLibrary
                 }
                 catch(FormatException )
                 {
-                    Debug.WriteLine("Fail parsing with" + toParse);
-                    throw new FormatException(toParse); //adding the string for which the parsing had failed for easier debugging
+                    Debug.WriteLine("Fails parsing with" + toParse);
+                    throw new FormatException("Fails parsing with" + toParse); //adding the string for which the parsing had failed for easier debugging
                 }
             }
             return result;
@@ -57,12 +57,13 @@ namespace WcfDollarLibrary
             }
             if (toParse=="")
             {
-                throw new FormatException("");
+                throw new FormatException("Empty string");
             }
             string[] values = toParse.Split(',');
             if (values.Length > 2 || values.Length == 0)
-            {
-                throw new FormatException();
+            { 
+                Debug.WriteLine("Fails parsing with" + toParse);
+            throw new FormatException("Fails parsing with" + toParse);
             }
             if (values.Length == 2)
             {
@@ -75,7 +76,8 @@ namespace WcfDollarLibrary
                 fractionText = fractionText.Substring(0, 2); //truncate too many digits
                 if(!fractionText.All(char.IsDigit))
                 {
-                    throw new FormatException(toParse);
+                    Debug.WriteLine("Fails parsing with" + toParse);
+                    throw new FormatException("Fails parsing with" + toParse);
                 }
                 try
                 {
@@ -84,7 +86,7 @@ namespace WcfDollarLibrary
                 catch (FormatException)
                 {
                     Debug.WriteLine("Fail parsing with" + toParse);
-                    throw new FormatException(toParse); //adding the string for which the parsing had failed for easier debugging
+                    throw new FormatException("Fail parsing with" + toParse); //adding the string for which the parsing had failed for easier debugging
                 }
 
                
@@ -97,7 +99,7 @@ namespace WcfDollarLibrary
             catch (FormatException)
             {
                 Debug.WriteLine("Fail parsing with" + toParse);
-                throw new FormatException(toParse); //adding the string for which the parsing had failed for easier debugging
+                throw new FormatException("Fail parsing with" + toParse); //adding the string for which the parsing had failed for easier debugging
             }
             return new Tuple<int, int>(ones, decimals);
 

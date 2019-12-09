@@ -14,8 +14,22 @@ namespace WcfDollarLibrary
         private static readonly string pluralSuffix = "s";
         public string Convert(string value)
         {
-
-            return ConvertDollars(value);
+            try
+            {
+                return ConvertDollars(value);
+            }
+            catch(ArgumentNullException e)
+            {
+                throw new FaultException<ArgumentNullException>(e, new FaultReason("Argument is null"));
+            }
+            catch (FormatException e)
+            {
+                throw new FaultException<FormatException>(e,new FaultReason (e.Message));
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                throw new FaultException<ArgumentOutOfRangeException>(e, new FaultReason("Out of range"));
+            }
         }
 
         /// <summary>
@@ -25,7 +39,8 @@ namespace WcfDollarLibrary
         /// <returns></returns>
         private string ConvertDollars(string value)
         {
-            Tuple<int, int> t = ParsingUtils.ParseMoneyAmount(value);
+
+            Tuple<int, int> t = ParsingUtils.ParseMoneyAmount(value); //no check for exceptions, apropiate logging was added in ParsingUtils and exceptions will be converted into WCF faults elsewhere 
             StringBuilder result = new StringBuilder();
             result.Append($"{ParsingUtils.NumeralsAsWords(t.Item1)} {currencies[0]}");
             if(t.Item1!=1)
