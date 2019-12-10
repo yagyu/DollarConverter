@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfDollarLibrary", "WcfDoll
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DollarClient", "DollarClient\DollarClient.csproj", "{971CBC80-8973-4AC1-9A97-FBC9984E7644}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DollarHost", "DollarHost\DollarHost.csproj", "{E585B251-4B8F-43BE-A7E3-EFB7B2CAAC20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{971CBC80-8973-4AC1-9A97-FBC9984E7644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{971CBC80-8973-4AC1-9A97-FBC9984E7644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{971CBC80-8973-4AC1-9A97-FBC9984E7644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E585B251-4B8F-43BE-A7E3-EFB7B2CAAC20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E585B251-4B8F-43BE-A7E3-EFB7B2CAAC20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E585B251-4B8F-43BE-A7E3-EFB7B2CAAC20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E585B251-4B8F-43BE-A7E3-EFB7B2CAAC20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
