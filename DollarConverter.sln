@@ -5,7 +5,10 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfDollarLibrary", "WcfDollarLibrary\WcfDollarLibrary.csproj", "{D1D36EE3-3286-4603-89A4-99B83F8DFCB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DollarClient", "DollarClient\DollarClient.csproj", "{971CBC80-8973-4AC1-9A97-FBC9984E7644}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DollarWPFClient", "DollarClient\DollarWPFClient.csproj", "{971CBC80-8973-4AC1-9A97-FBC9984E7644}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D1D36EE3-3286-4603-89A4-99B83F8DFCB0} = {D1D36EE3-3286-4603-89A4-99B83F8DFCB0}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DollarHost", "DollarHost\DollarHost.csproj", "{E585B251-4B8F-43BE-A7E3-EFB7B2CAAC20}"
 EndProject

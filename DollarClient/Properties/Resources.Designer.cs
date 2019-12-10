@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DollarClient.Properties
+namespace DollarWpfClient.Properties
 {
 
 

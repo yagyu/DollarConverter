@@ -1,7 +1,7 @@
-﻿<Application x:Class="DollarClient.App"
+﻿<Application x:Class="DollarWpfClient.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DollarClient"
+             xmlns:local="clr-namespace:DollarWpfClient"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

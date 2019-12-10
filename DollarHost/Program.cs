@@ -10,7 +10,7 @@ namespace DollarHost
     {
         static void Main(string[] args)
         {
-            Uri address = new Uri("http://localhost:8733/Dollar/");
+            Uri address = new Uri("http://localhost:8000/Dollar/");
 
             // Step 2: Create a ServiceHost instance.
             ServiceHost host = new ServiceHost(typeof(DollarConverter), address);
@@ -23,8 +23,10 @@ namespace DollarHost
 
                 ServiceMetadataBehavior behavior = new ServiceMetadataBehavior();
                 behavior.HttpGetEnabled = true;
+                behavior.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
                 host.Description.Behaviors.Add(behavior);
-
+                host.AddServiceEndpoint( ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexHttpBinding(), "mex");
+                host.AddServiceEndpoint(typeof(IDollar), new WSHttpBinding(), "");
 
                 host.Open();
                 Console.WriteLine("Listening...");

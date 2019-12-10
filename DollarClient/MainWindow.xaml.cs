@@ -12,17 +12,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DollarWpfClient.DollarServiceReference;
 
-namespace DollarClient
+namespace DollarWpfClient
 {
     /// <summary>
     /// Logika interakcji dla klasy MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        DollarClient dc;   
         public MainWindow()
         {
             InitializeComponent();
+            dc = new DollarClient();
+            dc.Open();
+
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+            
+            Currency.Content= await dc.ConvertAsync(InputCurrency.Text);
         }
     }
 }
