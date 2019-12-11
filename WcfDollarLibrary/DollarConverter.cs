@@ -16,7 +16,7 @@ namespace WcfDollarLibrary
         {
             try
             {
-                return ConvertDollars(value);
+                return ConvertCurrency(value);
             }
             catch(ArgumentNullException e)
             {
@@ -37,7 +37,7 @@ namespace WcfDollarLibrary
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private string ConvertDollars(string value)
+        private string ConvertCurrency(string value)
         {
 
             Tuple<int, int> t = ParsingUtils.ParseMoneyAmount(value); //no check for exceptions, apropiate logging was added in ParsingUtils and exceptions will be converted into WCF faults elsewhere 
