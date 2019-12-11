@@ -111,12 +111,12 @@ namespace WcfDollarLibrary
                     fractionText +="0";
 
                 }
-                fractionText = fractionText.Substring(0, 2); //truncate too many digits
                 if(!fractionText.All(char.IsDigit))
                 {
                     Debug.WriteLine("Fails parsing with" + toParse);
                     throw new FormatException("Fails parsing with" + toParse);
                 }
+                fractionText = fractionText.Substring(0, 2); //truncate too many digits
                 try
                 {
                     decimals = ParseInt(fractionText);

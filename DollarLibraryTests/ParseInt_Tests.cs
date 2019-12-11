@@ -9,7 +9,7 @@ using WcfDollarLibrary;
 namespace DollarLibraryTests
 {
     [TestFixture]
-    public class DollarTests
+    public class ParseInt_Tests
     {
         [TestCase(0)]
         [TestCase(1)]
