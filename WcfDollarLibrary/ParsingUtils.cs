@@ -7,6 +7,9 @@ using System.Diagnostics;
 
 namespace WcfDollarLibrary
 {
+    /// <summary>
+    /// Helper class with various methods for parsing and converting
+    /// </summary>
     public static class ParsingUtils
     {
         private static readonly string[] onesNames = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
@@ -37,12 +40,21 @@ namespace WcfDollarLibrary
         /// </summary>
         /// <param name="toParse"></param>
         /// <returns></returns>
-        /// <exception cref="FormatException">Thrown when theres illegal character in toParse</exception>
+        /// <exception cref="FormatException">Thrown when there's illegal character in toParse or it is empty</exception>
+        /// <exception cref="ArgumentNullException">Thrown when toParse is null</exception>
         public static int ParseInt(string toParse)
         {
             int result = 0;
+            if(toParse==null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (toParse == "")
+            {
+                throw new FormatException("Empty string");
+            }
             string temp = toParse.Replace(" ", "").Replace(".", ""); //removing thousands separators (without strict check about their position);
-            if(string.IsNullOrEmpty(toParse))
+            if(toParse=="")
             {
                 Debug.WriteLine("Fails parsing with" + toParse);
                 throw new FormatException("Fails parsing with" + toParse); //adding the string for which parsing had failed for easier debugging
@@ -64,11 +76,16 @@ namespace WcfDollarLibrary
         }
 
         /// <summary>
-        /// 
+        /// Converting decimal numeral written as a  string (with or without coma)
+        /// into a pair  of ints representing integer and fractional parts 
+        /// the fractional part is expressed as a number of hundredths
+        /// The additional digits (i.e. more than two) in the fractional part are ignored
         /// </summary>
         /// <param name="toParse"></param>
         /// <returns></returns>
-        public static Tuple<int,int> ParseMoneyAmount(string toParse)
+        /// <exception cref="ArgumentNullException">Thrown when argument is null</exception>
+        /// <exception cref="FormatException">incorrect format of the input string</exception>
+        public static Tuple<int,int> ParseDecimal(string toParse)
         {
             int decimals=0;
             int ones=0;

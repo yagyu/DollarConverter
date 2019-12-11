@@ -12,6 +12,11 @@ namespace WcfDollarLibrary
     {
         private static readonly string[] currencies = { "dollar", "cent" };
         private static readonly string pluralSuffix = "s";
+        /// <summary>
+        /// Main method of the WCF service
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public string Convert(string value)
         {
             try
@@ -33,14 +38,14 @@ namespace WcfDollarLibrary
         }
 
         /// <summary>
-        /// 
+        /// Converts string representing decimal number into dollars and cents
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         private string ConvertCurrency(string value)
         {
 
-            Tuple<int, int> t = ParsingUtils.ParseMoneyAmount(value); //no check for exceptions, apropiate logging was added in ParsingUtils and exceptions will be converted into WCF faults elsewhere 
+            Tuple<int, int> t = ParsingUtils.ParseDecimal(value); //no check for exceptions, apropiate logging was added in ParsingUtils and exceptions will be converted into WCF faults elsewhere 
             StringBuilder result = new StringBuilder();
             result.Append($"{ParsingUtils.NumeralsAsWords(t.Item1)} {currencies[0]}");
             if(t.Item1!=1)
