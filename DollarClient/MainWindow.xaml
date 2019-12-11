@@ -14,8 +14,8 @@
             <ColumnDefinition Width="213*"/>
             <ColumnDefinition Width="67*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="InputCurrency" HorizontalAlignment="Left" Height="23" Margin="1,6,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="296" Grid.ColumnSpan="3"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="195,6,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Grid.ColumnSpan="2" Click="Button_Click"/>
+        <TextBox x:Name="InputCurrency" HorizontalAlignment="Left" Height="23" Margin="1,6,0,0" TextWrapping="Wrap" Text="Please enter a value to convert" VerticalAlignment="Top" Width="296" Grid.ColumnSpan="3"/>
+        <Button Content="Convert" HorizontalAlignment="Left" Margin="195,6,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Grid.ColumnSpan="2" Click="Button_Click"/>
         <Label x:Name="Currency" Content="" HorizontalAlignment="Left" Margin="12,42,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="270"/>
 
 

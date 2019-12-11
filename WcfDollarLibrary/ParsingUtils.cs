@@ -14,12 +14,13 @@ namespace WcfDollarLibrary
         private static readonly string[] teensNames = { "ten", "eleven", "twelve", "thirteen", "forteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
         private static readonly string[] unitNames = { "hundred", "thousand", "million" };
         /// <summary>
-        /// The method to convert digit to its numeric value
+        /// The method for converting digit to its numeric value
         /// uses an assumption that all the digits are between '0' and '9'
         /// ultra-correct alternative would be to do switch with case for every digit
         /// </summary>
-        /// <param name="c"></param>
+        /// <param name="c">character for conversion</param>
         /// <returns></returns>
+        /// <exception cref="FormatException">thrown when character isn't digit</exception>
         private static int CharToInt(char c)
         {
             if(!char.IsDigit(c))
@@ -28,6 +29,15 @@ namespace WcfDollarLibrary
             }
             return (int)(c - '0'); 
         }
+
+        /// <summary>
+        /// Converting string to int
+        /// ignoring common thousands separators, i. e.  ' ' and '.'
+        /// for simplicity theres no check if separators are in correct places
+        /// </summary>
+        /// <param name="toParse"></param>
+        /// <returns></returns>
+        /// <exception cref="FormatException">Thrown when theres illegal character in toParse</exception>
         public static int ParseInt(string toParse)
         {
             int result = 0;
@@ -47,6 +57,12 @@ namespace WcfDollarLibrary
             }
             return result;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="toParse"></param>
+        /// <returns></returns>
         public static Tuple<int,int> ParseMoneyAmount(string toParse)
         {
             int decimals=0;
@@ -107,6 +123,11 @@ namespace WcfDollarLibrary
 
         }
 
+        /// <summary>
+        /// Method for converting numbers 0-999999999 into words
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         public static string NumeralsAsWords(int number)
         {
             if (number >= 1000000000 || number < 0)

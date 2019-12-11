@@ -29,5 +29,20 @@ namespace DollarLibraryTests
             Assert.AreEqual(value, ParsingUtils.ParseInt(numeral));
         }
 
+        [TestCase(1000, "1 000")]
+        [TestCase(10000, "10 000")]
+        [TestCase(1000000, "1 000 000")]
+        [TestCase(2000, "2 000")]
+        [TestCase(999999999, "999 999 999")]
+        [TestCase(1000, "1.000")]
+        [TestCase(10000, "10.000")]
+        [TestCase(1000000, "1.000.000")]
+        [TestCase(2000, "2.000")]
+        [TestCase(999999999, "999.999.999")]
+        public void ParseInt_StandardPassStringsThousandsSeparator(int value, string numeral)
+        {
+            Assert.AreEqual(value, ParsingUtils.ParseInt(numeral));
+        }
+
     }
 }
