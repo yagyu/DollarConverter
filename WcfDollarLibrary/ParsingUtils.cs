@@ -54,7 +54,7 @@ namespace WcfDollarLibrary
                 throw new FormatException("Empty string");
             }
             string temp = toParse.Replace(" ", "").Replace(".", ""); //removing thousands separators (without strict check about their position);
-            if(toParse=="")
+            if(temp=="")
             {
                 Debug.WriteLine("Fails parsing with" + toParse);
                 throw new FormatException("Fails parsing with" + toParse); //adding the string for which parsing had failed for easier debugging

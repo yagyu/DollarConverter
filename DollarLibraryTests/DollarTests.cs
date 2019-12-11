@@ -44,5 +44,27 @@ namespace DollarLibraryTests
             Assert.AreEqual(value, ParsingUtils.ParseInt(numeral));
         }
 
+        [Test]
+        public void ParseInt_Null()
+        {
+            Assert.Throws<ArgumentNullException>(delegate { ParsingUtils.ParseInt(null); });
+        }
+
+        [Test]
+        public void ParseInt_EmptyString()
+        {
+            Assert.Throws<FormatException>(delegate { ParsingUtils.ParseInt(""); });
+        }
+
+        [TestCase("asdasfef")]
+        [TestCase("         ")]
+        [TestCase("......")]
+        [TestCase("as123")]
+        [TestCase("342kljf")]
+        [TestCase("asdasf342553ef")]
+        public void ParseInt_WrongString(string value)
+        {
+            Assert.Throws<FormatException>(delegate { ParsingUtils.ParseInt(value); });
+        }
     }
 }
