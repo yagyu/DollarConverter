@@ -14,7 +14,7 @@ namespace WcfDollarLibrary
     {
         private static readonly string[] onesNames = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
         private static readonly string[] tensNames = { "", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
-        private static readonly string[] teensNames = { "ten", "eleven", "twelve", "thirteen", "forteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+        private static readonly string[] teensNames = { "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
         private static readonly string[] unitNames = { "hundred", "thousand", "million" };
         /// <summary>
         /// The method for converting digit to its numeric value
@@ -166,24 +166,32 @@ namespace WcfDollarLibrary
             int thousands = (number % 1000000)/1000;
             int ones = (number % 1000);
             int hundreds = ones / 100;
+            string separator = "";
             StringBuilder result = new StringBuilder("");
             if(millions>0)
             {
-                result.Append($"{SmallNumerals(millions)} {unitNames[2]} ");
+                result.Append($"{SmallNumerals(millions)} {unitNames[2]}");
+                separator = " ";
             }
             if(thousands>0)
             {
+                result.Append(separator);
                 if(thousands==1 && hundreds>0)
                 {
-                    result.Append($"{teensNames[hundreds]} {unitNames[0]} ");
+                    result.Append($"{teensNames[hundreds]} {unitNames[0]}");
                     ones %= 100;
                 }
                 else
                 {
-                    result.Append($"{SmallNumerals(thousands)} {unitNames[1]} ");
+                    result.Append($"{SmallNumerals(thousands)} {unitNames[1]}");
                 }
+                separator = " ";
             }
-            result.Append(SmallNumerals(ones));
+            if (ones > 0)
+            {
+                result.Append(separator);
+                result.Append(SmallNumerals(ones));
+            }
             return result.ToString();
         }
 
@@ -204,32 +212,34 @@ namespace WcfDollarLibrary
             int tens = (number % 100) / 10;
             int ones = number % 10;
             StringBuilder result = new StringBuilder();
-            if(number>100)
+            string separator = "";
+ 
+            if (hundreds>0)
             {
-                
-                if (hundreds>0)
-                {
-                    result.Append(onesNames[hundreds]);
-                    result.Append(" ");
-                    result.Append(unitNames[0]);
-                    result.Append(" ");
-                }
-
+                result.Append(onesNames[hundreds]);
+                result.Append(" ");
+                result.Append(unitNames[0]);
+                separator = " ";    
             }
 
+            
             if(tens==1) //special case for 10-19
             {
+                result.Append(separator);
                 result.Append(teensNames[ones]);
                 return result.ToString();
             }
-            result.Append(tensNames[tens]);
-            if(ones>0 && tens > 0)
+            
+            if(tens > 0)
             {
-                result.Append("-");
+                result.Append(separator);
+                result.Append(tensNames[tens]);
+                separator = "-";
             }
 
             if(ones>0)
             {
+                result.Append(separator);
                 result.Append(onesNames[ones]);
             }
             return result.ToString();

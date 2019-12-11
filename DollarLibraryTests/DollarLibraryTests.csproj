@@ -48,7 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ParseDecimal_tests.cs" />
+    <Compile Include="NumeralsAsWords_Tests.cs" />
+    <Compile Include="ParseDecimal_Tests.cs" />
     <Compile Include="ParseInt_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
