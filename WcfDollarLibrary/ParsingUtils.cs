@@ -42,6 +42,11 @@ namespace WcfDollarLibrary
         {
             int result = 0;
             string temp = toParse.Replace(" ", "").Replace(".", ""); //removing thousands separators (without strict check about their position);
+            if(string.IsNullOrEmpty(toParse))
+            {
+                Debug.WriteLine("Fails parsing with" + toParse);
+                throw new FormatException("Fails parsing with" + toParse); //adding the string for which parsing had failed for easier debugging
+            }
             foreach(char c in temp)
             {
                 result *= 10;
@@ -52,7 +57,7 @@ namespace WcfDollarLibrary
                 catch(FormatException )
                 {
                     Debug.WriteLine("Fails parsing with" + toParse);
-                    throw new FormatException("Fails parsing with" + toParse); //adding the string for which the parsing had failed for easier debugging
+                    throw new FormatException("Fails parsing with" + toParse); //adding the string for which parsing had failed for easier debugging
                 }
             }
             return result;
