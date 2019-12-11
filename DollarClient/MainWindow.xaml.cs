@@ -30,11 +30,11 @@ namespace DollarWpfClient
 
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
            
             
-            Currency.Content= await dc.ConvertAsync(InputCurrency.Text);
+            Currency.Content=dc.Convert(InputCurrency.Text);
         }
     }
 }
